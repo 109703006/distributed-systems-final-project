@@ -1,1 +1,1 @@
-# distribute-system-final-project
+# distributed-system-final-project
