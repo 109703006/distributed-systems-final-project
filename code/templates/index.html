@@ -56,6 +56,23 @@
                         <h2 class="mt-0">Search</h2>
                         <hr class="divider" />
                         <p>搜尋</p>
+                        <form align="center" action="/search" method="POST">
+                            <font size="5">&emsp;場地：</font>
+                            <select name="Stadium">
+                                <optgroup label="Stadium">
+                                <option>XinZhuang</option>
+                                <option>Tianmu</option>
+                                <option>Taoyuan International</option>
+                                <option>Taichung Intercontinental </option>
+                                <option>Tainan</option>
+                            </select>
+                            </br></br>
+                            <font size="5">&emsp;時間：</font>
+                            <input name="Time" type="date">
+                            </br></br>
+                            <p><button class="btn btn-primary" type="submit" align="center">Send</button></p>
+                        </form>
+                        <h3>{{result}}</h3>{{score}}
                     </div>
                 </div>
             </div>
@@ -67,10 +84,26 @@
                     <div class="col-lg-8 col-xl-6 text-center">
                         <h2 class="mt-0">Subscribe</h2>
                         <hr class="divider" />
-                        <p >訂閱</p>
+                        <form align="center" action="/subscribe" method="POST">
+                            <font size="5">&emsp;場地：</font>
+                            <select name="Stadium">
+                                <optgroup label="Stadium">
+                                <option>XinZhuang</option>
+                                <option>Tianmu</option>
+                                <option>Taoyuan International</option>
+                                <option>Taichung Intercontinental </option>
+                                <option>Tainan</option>
+                            </select>
+                            </br></br>
+                            <p><button class="btn btn-primary" type="submit" align="center">Send</button></p>
+                        </form>
+                        <!--<div align="center">{% block content %}{% endblock content %}</div>-->
+                        <h3>{{result}}</h3>{{score}}
                     </div>
                 </div>
             </div>
+            
+
         </section>
         <!-- Contact-->
         <section class="page-section " id="Contact">
