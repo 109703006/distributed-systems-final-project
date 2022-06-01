@@ -1,12 +1,8 @@
-from flask import Flask, render_template
+import requests
+from bs4 import BeautifulSoup
 
-app = Flask(__name__)
+r = requests.get("https://zxc22.idv.tw/sche/main.asp?clickflag=999")
+r.encoding = "big5"
 
-
-@app.route("/")
-def root():
-    return render_template("index.html")
-
-
-app.run(port=8080)
-
+soup = BeautifulSoup(r.text, "html.parser")
+print(soup.prettify())
