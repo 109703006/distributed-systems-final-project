@@ -1,4 +1,4 @@
 # distributed-system-final-project
 
 After installing, run
-```pip install kazoo```
+```pip3 install -r packet.txt```
