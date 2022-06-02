@@ -14,15 +14,15 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-# IP = 'localhost'
-# if args.server:
-#     IP = args.server
-# # Assume the same IP address with port 2181~2183
-# server_list = IP + ':' + str(2181)
-# for i in range(1,3):
-#     server_list += (',' + IP + ':' + str(2181+i))
-# # print(server_list)
-server_list = "192.168.56.101,192.168.56.102,192.168.56.103"
+IP = "localhost"
+if args.server:
+    IP = args.server
+# Assume the same IP address with port 2181~2183
+server_list = IP + ":" + str(2181)
+for i in range(1, 3):
+    server_list += "," + IP + ":" + str(2181 + i)
+# print(server_list)
+# server_list = "192.168.56.101,192.168.56.102,192.168.56.103"
 
 zk = KazooClient(server_list)
 zk.start()
