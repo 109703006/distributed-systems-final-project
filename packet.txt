@@ -1,2 +1,4 @@
 flask
 kazoo
+requests
+beautifulsoup4
