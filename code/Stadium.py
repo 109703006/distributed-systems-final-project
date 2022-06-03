@@ -1,3 +1,4 @@
+from logging import exception
 from kazoo.client import *
 import argparse
 import codecs
@@ -44,7 +45,10 @@ for cmd in lines:
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        zk.create(path, data, makepath=True)
+        try:
+            zk.create(path, data, makepath=True)
+        except:
+            print(cmd, "already exist!")
 
 
 cmd = input(HINT_MSG)
@@ -55,6 +59,9 @@ while cmd != "q":
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        zk.create(path, data, makepath=True)
+        try:
+            zk.create(path, data, makepath=True)
+        except:
+            print(cmd, "already exist!")
     cmd = input(HINT_MSG)
 zk.stop()
