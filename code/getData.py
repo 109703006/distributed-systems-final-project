@@ -13,13 +13,12 @@ soup = BeautifulSoup(r.text, "html.parser")
 # print(soup.prettify())
 table = soup.find_all("td", align="center", bgcolor="white", valign="top")
 # print(table)
+path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
+file = open(path, "w")
+
 month = "5"
 for element in table:
-    # day = "0"
-    # team1 = "0"
-    # team2 = "0"
     elements = element.getText().split(" ")
-    # print(elements)
     # get date
     if len(elements[0]) == 4:
         day = elements[0][0]
@@ -34,17 +33,45 @@ for element in table:
     team2 = teams.split("-")[1]
     stadium = game1.split("(", 1)[1].split(")", 1)[0]
     score = game1.split("(", 1)[1].split(")", 1)[1].split("(", 1)[0]
-    print(stadium, str(month) + "-" + str(day), team1 + ":" + team2, score)
+    file.write(
+        stadium
+        + " "
+        + str(month)
+        + "-"
+        + str(day)
+        + " "
+        + team1
+        + ":"
+        + team2
+        + " "
+        + score
+        + "\n"
+    )
+    # print(stadium, str(month) + "-" + str(day), team1 + ":" + team2, score)
 
     # get game2
     game2 = elements[2]
     if len(game2) < 12:
         continue
-    # print(game2, len(game2))
     teams = game2.split("(", 1)[0]
     team1 = teams.split("-")[0]
     team2 = teams.split("-")[1]
     stadium = game2.split("(", 1)[1].split(")", 1)[0]
     score = game2.split("(", 1)[1].split(")", 1)[1].split("(", 1)[0]
-    # print(team1, team2, stadium, score)
-    print(stadium, str(month) + "-" + str(day), team1 + ":" + team2, score)
+    file.write(
+        stadium
+        + " "
+        + str(month)
+        + "-"
+        + str(day)
+        + " "
+        + team1
+        + ":"
+        + team2
+        + " "
+        + score
+        + "\n"
+    )
+    # print(stadium, str(month) + "-" + str(day), team1 + ":" + team2, score)
+
+file.close()
