@@ -17,6 +17,41 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        <!-- Socket.IO 的 CDN 連結 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"
+            integrity="sha512-WL6WGKMPBiM9PnHRYIn5YEtq0Z8XP4fkVb4qy7PP4vhmYQErJ/dySyXuFIMDf1eEYCXCrQrMJfkNwKc9gsjTjA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <!-- Socket.IO 的使用 -->
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function () {
+                // Socket.IO send message
+                $("#send").click(function (e) {
+                // Send message
+                    socket.emit('send', $('#message').val())
+                // Clear input field
+                    $('#message').val('')
+                });
+                // Socket.IO Start connect
+                var socket = io.connect();
+                // Socket.IO get test
+                socket.on("message", function (data) {
+                    $('#chat_content').append('<p>Result : ' + data + '</p>');
+                });
+                // Socket.IO send test
+                $("#subscribe").click(function (e) {
+                    socket.emit('subscribe')
+                });
+                $("#stop").click(function (e) {
+                    socket.emit('stop')
+                });
+            });
+        </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -97,8 +132,13 @@
                             </br></br>
                             <p><button class="btn btn-primary" type="submit" align="center">Send</button></p>
                         </form>
-                        <!--<div align="center">{% block content %}{% endblock content %}</div>-->
-                        <h3>{{result}}</h3>{{score}}
+                        <fieldset>
+                            <input type="button" class="btn btn-primary" id="subscribe" value="Start" />
+                            <input type="button" class="btn btn-primary" id="stop" value="Stop" />
+                            <p></p>
+                        </fieldset>
+                        <p></p>
+                        <div id='chat_content'></div>
                     </div>
                 </div>
             </div>
