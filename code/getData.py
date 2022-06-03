@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import codecs
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
@@ -13,8 +14,9 @@ soup = BeautifulSoup(r.text, "html.parser")
 # print(soup.prettify())
 table = soup.find_all("td", align="center", bgcolor="white", valign="top")
 # print(table)
-path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
-file = open(path, "w")
+# path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
+path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
+file = codecs.open(path, "w", encoding="utf-8")
 
 month = "5"
 for element in table:
