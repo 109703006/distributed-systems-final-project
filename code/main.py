@@ -22,7 +22,8 @@ def search():
     allInfo="No data\n"
     # 
     # 最終版中要刪除
-    path = r"D:\nccu\1102DistSys\distributed-systems-final-project\code\info.txt"
+    #path = r"D:\nccu\1102DistSys\distributed-systems-final-project\code\info.txt"
+    path = "./code/info.txt"
     file = codecs.open(path, "r", encoding="utf-8")
     lines = file.readlines()
     file.close()

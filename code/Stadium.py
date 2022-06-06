@@ -33,7 +33,8 @@ zk.start()
 # read file
 # path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
 # path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
-path = "D:/zk/distributed-systems-final-project/code/info.txt"
+#path = "D:/zk/distributed-systems-final-project/code/info.txt"
+path = "./code/info.txt"
 file = codecs.open(path, "r", encoding="utf-8")
 lines = file.readlines()
 # print(test)
