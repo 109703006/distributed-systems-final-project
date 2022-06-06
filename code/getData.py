@@ -18,6 +18,7 @@ table = soup.find_all("td", align="center", bgcolor="white", valign="top")
 path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
 file = codecs.open(path, "w", encoding="utf-8")
 
+year = "2022"
 month = "5"
 for element in table:
     elements = element.getText().split(" ")
@@ -38,6 +39,8 @@ for element in table:
     file.write(
         stadium
         + " "
+        + str(year)
+        + "-"
         + str(month)
         + "-"
         + str(day)
@@ -63,6 +66,8 @@ for element in table:
     file.write(
         stadium
         + " "
+        + str(year)
+        + "-"
         + str(month)
         + "-"
         + str(day)
