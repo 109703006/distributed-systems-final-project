@@ -5,7 +5,6 @@ import configs
 # 最終版中要刪除
 import codecs
 # 
-# 
 
 app = Flask(__name__, static_folder="static", static_url_path="/")
 app.config.from_object(configs)
@@ -33,7 +32,6 @@ def search():
         if data[0]==place and data[1]==time:
             allInfo=data[2]+" "+data[3]+"\r"
             print(allInfo)
-    # 
     # 
     print("search:",place,time)
     return render_template("index.html", result="Result: ", score=allInfo)
