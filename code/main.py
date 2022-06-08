@@ -1,3 +1,4 @@
+from cv2 import line
 from flask import Flask,request,redirect,url_for,render_template
 from flask_socketio import SocketIO, emit
 import configs
@@ -19,22 +20,26 @@ def index():
 def search():
     place=request.form['Stadium']
     time=request.form['Time']
-    allInfo="No data\n"
-    # 
-    # 最終版中要刪除
-    #path = r"D:\nccu\1102DistSys\distributed-systems-final-project\code\info.txt"
+    allInfo="目前沒有比賽\n"
+
     path = "./code/info.txt"
-    file = codecs.open(path, "r", encoding="utf-8")
-    lines = file.readlines()
-    file.close()
+
+    file_ = codecs.open(path, "r", encoding="utf-8")
+    lines = file_.readlines()
+    file_.close()
+
+    i = 0
     for cmd in lines:
-        cmd = cmd.replace("\n", "")
+        cmd = cmd.replace("\r\n", "")
         data = cmd.split(" ")
+        print(data)
         if data[0]==place and data[1]==time:
-            allInfo=data[2]+" "+data[3]+"\r"
+            i+=1
+            allInfo = allInfo.replace("目前沒有比賽", "")
+            allInfo+=str(i)+"."+data[2]+" "+data[3]+"\n"
             print(allInfo)
-    # 
-    print("search:",place,time)
+
+    print("search:",place,time,allInfo)
     return render_template("index.html", result="Result: ", score=allInfo)
     
 @app.route("/subscribe", methods=['POST'])
