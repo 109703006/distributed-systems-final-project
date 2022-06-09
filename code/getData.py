@@ -15,17 +15,15 @@ soup = BeautifulSoup(r.text, "html.parser")
 table = soup.find_all("td", align="center", bgcolor="white", valign="top")
 # print(table)
 # path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
-# path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
-path = r"D:\nccu\1102DistSys\distributed-systems-final-project\code\info.txt"
+path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
 file = codecs.open(path, "w", encoding="utf-8")
 
-year = "2022"
 month = "5"
 for element in table:
     elements = element.getText().split(" ")
     # get date
     if len(elements[0]) == 4:
-        day = "0" + elements[0][0]
+        day = elements[0][0]
     elif len(elements[0]) == 5:
         day = elements[0][0] + elements[0][1]
     else:
@@ -40,8 +38,6 @@ for element in table:
     file.write(
         stadium
         + " "
-        + str(year)
-        + "-"
         + str(month)
         + "-"
         + str(day)
@@ -67,8 +63,6 @@ for element in table:
     file.write(
         stadium
         + " "
-        + str(year)
-        + "-"
         + str(month)
         + "-"
         + str(day)

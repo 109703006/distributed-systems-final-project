@@ -41,7 +41,7 @@
                 var socket = io.connect();
                 // Socket.IO get test
                 socket.on("message", function (data) {
-                    $('#chat_content').append('<p>Result : ' + data + '</p>');
+                    $('#chat_content').append('<h4><p>' + data + '</p></h4>');
                 });
                 // Socket.IO send test
                 $("#subscribe").click(function (e) {
@@ -52,6 +52,7 @@
                 });
             });
         </script>
+        
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -90,7 +91,6 @@
                     <div class="col-lg-8 col-xl-6 text-center">
                         <h2 class="mt-0">Search</h2>
                         <hr class="divider" />
-                        <p>搜尋</p>
                         <form align="center" action="/search" method="POST">
                             <font size="5">&emsp;場地：</font>
                             <select name="Stadium">
@@ -105,14 +105,11 @@
                             </select>
                             </br></br>
                             <font size="5">&emsp;時間：</font>
-                            <input name="Time" type="date">
+                            <input name="Time" type="date" id="theDate" value="2022-01-01">
                             </br></br>
                             <p><button class="btn btn-primary" type="submit" align="center">Send</button></p>
                         </form>
-                        <h3>{{result}}</h3>
-                        <p>
-                            {{score}}
-                        </p>
+                        <h3>{{result}}</h3><h4>{{score}}</h4>
                     </div>
                 </div>
             </div>
@@ -139,13 +136,16 @@
                             </br></br>
                             <p><button class="btn btn-primary" type="submit" align="center">Send</button></p>
                         </form>
+                        
                         <fieldset>
                             <input type="button" class="btn btn-primary" id="subscribe" value="Start" />
                             <input type="button" class="btn btn-primary" id="stop" value="Stop" />
                             <p></p>
                         </fieldset>
                         <p></p>
+                        <h3>{{result_sub}}</h3>
                         <div id='chat_content'></div>
+                        
                     </div>
                 </div>
             </div>

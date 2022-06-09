@@ -31,10 +31,9 @@ zk = KazooClient(server_list)
 zk.start()
 
 # read file
-# path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
+path = "/Users/sunchunwei/Desktop/distributed-systems-final-project/code/info.txt"
 # path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
-#path = "D:/zk/distributed-systems-final-project/code/info.txt"
-path = "./code/info.txt"
+# path = "D:/zk/distributed-systems-final-project/code/info.txt"
 file = codecs.open(path, "r", encoding="utf-8")
 lines = file.readlines()
 # print(test)
@@ -47,15 +46,10 @@ for cmd in lines:
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        if zk.exists(path): 
-            zk.set(path, data)
-            print(f"{path} updated to {data}")
-        else:
+        try:
             zk.create(path, data, makepath=True)
-            @zk.DataWatch(path)
-            def my_func(data, stat):
-                # 註冊後如何找到main.py並使用socketio, 待解決
-                return
+        except:
+            print(cmd, "already exist!")
 
 
 cmd = input(HINT_MSG)
@@ -66,14 +60,9 @@ while cmd != "q":
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        if zk.exists(path): 
-            zk.set(path, data)
-            print(f"{path} updated to {data}")
-        else:
+        try:
             zk.create(path, data, makepath=True)
-            @zk.DataWatch(path)
-            def my_func(data, stat):
-                # 註冊後如何找到main.py並使用socketio, 待解決
-                return
+        except:
+            print(cmd, "already exist!")
     cmd = input(HINT_MSG)
 zk.stop()
