@@ -47,10 +47,15 @@ for cmd in lines:
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        try:
+        if zk.exists(path): 
+            zk.set(path, data)
+            print(f"{path} updated to {data}")
+        else:
             zk.create(path, data, makepath=True)
-        except:
-            print(cmd, "already exist!")
+            @zk.DataWatch(path)
+            def my_func(data, stat):
+                # 註冊後如何找到main.py並使用socketio, 待解決
+                return
 
 
 cmd = input(HINT_MSG)
@@ -61,9 +66,14 @@ while cmd != "q":
         path = "/" + data[0] + "/" + data[1]
         data = data[2] + "=" + data[3]
         data = data.encode("utf-8")
-        try:
+        if zk.exists(path): 
+            zk.set(path, data)
+            print(f"{path} updated to {data}")
+        else:
             zk.create(path, data, makepath=True)
-        except:
-            print(cmd, "already exist!")
+            @zk.DataWatch(path)
+            def my_func(data, stat):
+                # 註冊後如何找到main.py並使用socketio, 待解決
+                return
     cmd = input(HINT_MSG)
 zk.stop()

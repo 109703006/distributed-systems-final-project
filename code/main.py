@@ -1,4 +1,3 @@
-from cv2 import line
 from flask import Flask,request,redirect,url_for,render_template
 from flask_socketio import SocketIO, emit
 import configs
@@ -11,6 +10,20 @@ app = Flask(__name__, static_folder="static", static_url_path="/")
 app.config.from_object(configs)
 socketio = SocketIO(app,logger=True)
 flag=False
+
+
+'''
+訂閱功能需要kazoo client, 所以下方跟Stadium.py 一樣建立一個kazoo client, 連到的kazoo server ip addresses 相同
+'''
+from kazoo.client import *
+IP = "localhost"
+# Assume the same IP address with port 2181~2183
+server_list = IP + ":" + str(2181)
+for i in range(1, 3):
+    server_list += "," + IP + ":" + str(2181 + i)
+
+zk = KazooClient(server_list)
+zk.start()
 
 @app.route("/")
 def index():
@@ -46,6 +59,11 @@ def search():
 def subscribe():
     place=request.form['Stadium']
     print("subscribe:",place)
+    
+    # 用節點方式紀錄目前有訂閱的球場
+    if not zk.exists(f"/subscription/{place}"):
+        zk.create(f"/subscription/{place}", makepath=True)
+
     return render_template("index.html")
 
 @socketio.on('subscribe')
@@ -54,7 +72,22 @@ def push():
     flag=False
     while (True):
         socketio.sleep(1)
-        socketio.send("test")
+
+        '''
+        以下的loop目前是回傳所有有訂閱的球場的"所有比賽資訊"，目前尚未跟Stadium.py的DataWatch function合併一起，目前尚卡在技術問題
+        '''
+
+        subscribedStadiums = zk.get_children(f"/subscription")
+        for i, stadium in enumerate(subscribedStadiums):
+            print(f"stadium : {stadium}")
+            #針對每個訂閱的球場，找出所有節點
+            allDates = zk.get_children(f"/{stadium}")
+            for j, date in enumerate(allDates):
+                print(f"stadium : {stadium}, date : {date}")
+                #讀取該日期(也就是node)的value
+                data, stat = zk.get(f"/{stadium}/{date}")
+                socketio.send(f"stadium : {stadium}, date : {date}" + data.decode("utf-8"))
+
         if(flag):
             break
     
