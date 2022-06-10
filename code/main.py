@@ -20,7 +20,6 @@ def index():
 def search():
     place=request.form['Stadium']
     time=request.form['Time']
-    print(time)
     try:
         result=fan.search("/"+place+"/"+time)
         return render_template("index.html", result="Result: ", score=result)
@@ -31,7 +30,6 @@ def search():
 def subscribe():
     global path
     path="/"+request.form['Stadium']
-    print(path)
     return render_template("index.html",result_sub="Result: ")
 
 @socketio.on('subscribe')

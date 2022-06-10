@@ -20,12 +20,10 @@ class Fans:
             if len(newNode) == 0: # Prevent the first time call
                 return True
             self.Node=newNode[0]
-            print(self.Node)
             self.mark=True
             return False # Stop watch
     def subscribe_result(self,path):
         result=self.zk.get(path+"/"+str(self.Node))[0].decode("utf-8")
-        print(result)
         return (str(self.Node)+"\t"+result)
     def search(self,path):
         result=self.zk.get(path)[0].decode("utf-8")
