@@ -15,7 +15,7 @@ soup = BeautifulSoup(r.text, "html.parser")
 table = soup.find_all("td", align="center", bgcolor="white", valign="top")
 # print(table)
 # path = "/Users/wang/Dev/hw/distributed-systems-final-project/code/info.txt"
-path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
+path = "./info.txt"
 file = codecs.open(path, "w", encoding="utf-8")
 
 month = "05"
@@ -40,6 +40,8 @@ for element in table:
     file.write(
         stadium
         + " "
+        + "2022"
+        + "-"
         + str(month)
         + "-"
         + str(day)
@@ -51,7 +53,7 @@ for element in table:
         + score
         + "\n"
     )
-    print(stadium,"2022-"+str(month) + "-" + str(day), team1 + ":" + team2, score)
+    # print(stadium,"2022-"+str(month) + "-" + str(day), team1 + ":" + team2, score)
 
     # get game2
     game2 = elements[2]
@@ -65,6 +67,8 @@ for element in table:
     file.write(
         stadium
         + " "
+        + "2022"
+        + "-"
         + str(month)
         + "-"
         + str(day)
@@ -76,6 +80,6 @@ for element in table:
         + score
         + "\n"
     )
-    print(stadium, "2022-"+str(month) + "-" + str(day), team1 + ":" + team2, score)
+    # print(stadium, "2022-"+str(month) + "-" + str(day), team1 + ":" + team2, score)
 
 file.close()
