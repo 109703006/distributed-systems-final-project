@@ -31,7 +31,7 @@ zk = KazooClient(server_list)
 zk.start()
 
 # read file
-path = "/Users/sunchunwei/Desktop/distributed-systems-final-project/code/info.txt"
+path = "./info.txt"
 # path = r"C:\Users\user\dev\hw\distributed-systems-final-project\code\info.txt"
 # path = "D:/zk/distributed-systems-final-project/code/info.txt"
 file = codecs.open(path, "r", encoding="utf-8")
