@@ -9,4 +9,5 @@ After clon
 6. If you want to update the score, type the correct format in terminal which is running Stadium.py
 
 If you don't know how to work, you can see the demo video on the youtube!
+
 https://www.youtube.com/watch?v=uo9i0d-kM6M
