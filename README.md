@@ -1,5 +1,14 @@
-# distributed-system-final-project
+# Baseball system
 
+## Introduction
+Provide an website that you can subscribe and search for the score.
+Aslo can update the score on the terminal.
+## Tool
+ * Python
+    * flask
+    * kazoo(Zookeeper)
+    * requests
+## Install
 After clon
 1. set up zookeeper-modify the path of dataDir and dataLogDir in each zookeeper/sever1 sever2 sever3/conf/zoo.cfg
 2. ```./zkServer.sh start``` in each zookeeper/sever1 sever2 sever3/bin (mac)
